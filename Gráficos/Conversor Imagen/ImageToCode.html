@@ -1,0 +1,266 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <title> Conversor de Imagenes a WinMIPS64 V0.6 </title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        
+        <link rel="stylesheet" href="css/basic.css">
+        <script src="js/jquery/jquery-3.6.0.slim.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+       
+
+
+    </head>
+    <body>
+      <div class="container p-3 mb-2 bg-gradient-light text-dark">
+        <div class="card groupContainer groupImage">
+            <div class="card-header bg-primary text-light text-center">
+                Imagen
+            </div>
+            <div class="card-body">
+                    <div class="container p-0" id="imageGroup">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="canvasNormal">
+                                    <canvas width="64" height="64" id="canvas">
+                                    </canvas>
+                                </div>
+                            </div> 
+                            <div class="col-md-8">                        
+                                <div class="input-group input-group-sm mb-2" style="margin-bottom: 4px !important;">
+                                  <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-sm-width">Ancho</span>
+                                  </div>
+                                  <input type="text" id="imageWidth" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm-width" disabled>
+                                </div>
+                                
+                                <div class="input-group input-group-sm mb-2">
+                                  <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-sm-height">&nbsp;&nbsp;&nbsp;Alto</span>
+                                  </div>
+                                  <input type="text" id="imageHeight" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm-height" disabled>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-2" >
+                            <div class="col-md-12"> 
+                                <div class="canvasZoom">
+                                    <canvas width="256" height="256" id="canvasZoom">
+                                    </canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12"> 
+                                <input type="file" class="custom-file-input" id="srcImage" style="display:none"/>
+                                <div class="input-group input-group-sm mb-2">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Archivo</span>
+                                    </div> 
+                                    <input type="text" id="fileName" class="form-control" aria-label="Small"disabled>
+                                </div>
+                            </div>
+                        </div>
+                       <div class="row">
+                            <div class="col-md-12"> 
+                                        <button class="btn btn-success alignRight my-0" onclick="$('#srcImage').click()">Cargar Imagen</button>
+                            </div>
+                        </div>
+            </div> 
+        </div>
+    </div>
+        
+
+
+        <div class="card groupContainer groupExport">
+          <div class="card-header bg-primary text-light text-center">
+            Parámetros de Exportación
+          </div>
+          <div class="card-body">
+            
+            <div class="input-group mb-2">
+              <div class="input-group-prepend">
+                <label class="input-group-text" for="exportFmt">Formato</label>
+            </div>
+              
+            <select class="custom-select" id="exportFmt">
+                <option value="FmtPalette">Paleta - 1 byte x pixel</option>
+                <option value="FmtRGB">RGB - 3 bytes x pixel</option>
+                <option value="FmtXRGB" selected >XRGB - 4 bytes x pixel</option>
+            </select>
+           
+            </div>
+
+
+            <div class="input-group mb-2">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-default">&nbsp;Nombre</span>
+              </div>
+              <input type="text" id="imageName" value="NOMBRE_IMAGEN" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"/>
+            </div>
+            <div class="mb-2">
+                <button id="exportBtn" class="btn btn-success alignRight" name="exportBtn" onclick="click_exportBtn();">Generar Código</button>
+            </div>
+         
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Código<br>Generado</span>
+              </div>
+              <textarea class="form-control codeGen" id="exportCode" aria-label="Código<br>Generado"></textarea>
+            </div>
+            
+        </div>
+
+
+       
+      </div>
+    </body>
+    <script>
+    
+
+        var input = $("#srcImage");
+
+        
+        window.onload = function() {
+            var input = document.getElementById('srcImage');
+            input.addEventListener('change', handleFiles, false);
+        }
+
+        function handleFiles(e) {
+            var MAX_DIM = 64;
+            var SC = 4;
+            var canvas = $("#canvas")[0];
+            var ctx = canvas.getContext('2d');
+            var canvasZoom = $("#canvasZoom")[0];
+            var ctxZoom = canvasZoom.getContext('2d');
+        
+            var filename = e.target.files[0];
+            var url = URL.createObjectURL(filename);
+            var img = new Image();
+            canvas.width = MAX_DIM;
+            canvas.height= MAX_DIM;
+            canvasZoom.width = canvas.width*SC;
+            canvasZoom.height= canvas.height*SC;
+            
+            
+            
+            img.onload = function() {
+                if (img.width > MAX_DIM || img.height > MAX_DIM){
+                    $('#modalDimension').modal();
+                }
+                canvas.width = Math.min(img.width,MAX_DIM);
+                canvas.height= Math.min(img.height,MAX_DIM);
+                ctx.drawImage(img, 0, 0);  
+                ctxZoom.scale(SC, SC);
+                var x = (canvasZoom.width /SC-img.width)/2;
+                var y = (canvasZoom.height/SC-img.height)/2;
+                ctxZoom.drawImage(img, x, y);
+                
+                // actualiza info de imagen
+                $("#imageWidth").val(img.width);
+                $("#imageHeight").val(img.height);
+                $("#fileName").val(filename.name);
+                
+                //var fileName = $(this).val();
+                //replace the "Choose a file" label
+                //$(this).next('.custom-file-label').html(fileName);
+                
+            }
+            img.src = url;
+                       
+            
+        }
+        
+
+
+        function click_exportBtn(){
+            var canvasEl  = $("#canvas")[0];
+            var imgName = $("#imageName")[0].value;
+            var format = $("#exportFmt")[0].value;
+            var txtArea = $("#exportCode")[0] 
+            var code = "Formato no soportado aun";
+            
+            if (format == "FmtPalette"){
+            } else 
+            if (format == "FmtRGB") {
+            } else 
+            if (format == "FmtXRGB") {
+                code = canvasToCodeXRGB(canvasEl, imgName);
+            }
+            
+            txtArea.value = code;
+            txtArea.focus(); // Focus on textarea 
+            txtArea.select();// Select all text  
+        }
+
+    
+        function canvasToCodeXRGB(canvasEl, varName){
+            var EOL = "\r\n";
+            var CUT = 8;
+            var r,g,b, pxl, pcut, ln
+            var ctx = canvasEl.getContext('2d');
+            var pxlCode = 0
+            var code    = "; Esta Imagen ocupa " + (8+ canvasEl.width*canvasEl.height*4) + " bytes incluyendo dimension y pixeles. Cada declaracion de variable contiene "+CUT+" pixeles"+EOL;
+            code = code + "; Para dibujarla pasar a la subrutina la referencia a la variable "+varName+EOL;
+            code = code + varName+":    .word32 " + canvasEl.width + ","+canvasEl.height + EOL;
+            rawdata = ctx.getImageData(0, 0, canvasEl.width, canvasEl.height);
+            for (var i = 0, ln = 0, pcut=0 ; i < rawdata.data.length; i += 4, ln++, pcut = (pcut+1) % CUT) {
+                if (pcut == 0)
+                    code = code + varName +"_"+ln.toString(16).padStart(2,"0") + ": .word ";
+                r = rawdata.data[i];     // red
+                g = rawdata.data[i + 1]; // green
+                b = rawdata.data[i + 2]; // blue
+                
+                if (pcut & 1 == 1) {
+                    pxl = "0x" + ( (g << 16) | (g << 8) | r).toString(16).padStart(8,"0").toUpperCase() + pxl;
+                    code = code + pxl + (pcut < CUT-1 ? "," : EOL);
+                    pxl = "";
+                } else {
+                    pxl = ( (g << 16) | (g << 8) | r).toString(16).padStart(8,"0").toUpperCase();
+                }
+                //code = code + pxl+" ";
+                
+            }
+            if (pxl != "")
+                code = code + "0x"+pxl;
+            return code;
+            
+        }
+        
+        
+    </script>
+
+
+    <script>
+    
+        //$( "#loadImage" ).button();
+        
+     /*   //$( "#imageGroup" ).controlgroup();
+        //$( "#exportGroup" ).controlgroup();
+        $( "#exportFmt" ).selectmenu();
+        $( "#exportBtn" ).button();*/
+        
+
+        </script>
+        
+        <div class="modal" id="modalDimension" tabindex="-1" role="dialog">
+          <div class="modal-dialog  modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header bg-warning">
+                <h5 class="modal-title">¡Atención!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>La imagen fué recortada. El tamaño máximo de una imagen es de 64 pixeles de ancho por 64 píxeles de alto.</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+<html>

@@ -1,0 +1,48 @@
+
+body{
+    font-family: "Trebuchet MS", sans-serif;
+    margin: 5px 50px !important;
+    background: #eee !important;
+}
+
+
+
+
+.canvasNormal{
+    border: 1px  solid black;
+    width: 64px;
+    height:64px;
+    margin-bottom:5px;
+}
+.canvasZoom{
+    border: 1px  solid black;
+    width: 256px;
+    height:256px;
+}
+
+.groupContainer {
+    position: relative;
+    margin: 0.5rem;
+    float: left;
+}
+
+.groupImage {
+    width: 300px;
+
+}
+.groupExport {
+    width: 700px;   
+}
+
+textarea.codeGen {
+    height: 400px;
+
+    font-size: 0.8rem;
+    white-space: pre-wrap;
+}
+
+.alignRight{
+    float: right;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
