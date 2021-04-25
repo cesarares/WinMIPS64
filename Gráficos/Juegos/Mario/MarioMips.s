@@ -5,6 +5,7 @@
 ; 	Catedra:  Arquitectura de Computadoras 2020
 ;   Profesor: Cesar Estrebou
 ;	Alumno:   Diego Lanciotti
+;	Link:     https://github.com/cosme12/mariomips
 ;
 ; ##################################################################
 
@@ -23,7 +24,11 @@ ARROW_ARR: .byte 32
 BACKGROUND: .byte 12,0,0,1,0,2,0,3,0,4,0,0,1,1,1,2,1,3,1,4,1,0,2,1,2,2,2,3,2,4,2,0,3,1,3,2,3,3,3,4,3,0,4,1,4,2,4,3,4,4,4,99,99,99,99,99,99,99,99,99
 BLOQUE: .byte 16,0,0,0,1,0,2,0,3,98,8,1,0,2,0,3,0,98,24,4,0,1,1,2,1,3,1,1,2,2,2,3,2,1,3,2,3,3,3,0,4,98,28,1,4,2,4,3,4,4,1,4,2,4,3,98,4,4,4,99
 SUELO: .byte 40,0,0,1,0,3,0,4,0,0,1,1,1,2,1,3,1,4,1,98,16,2,0,0,2,1,2,2,2,3,2,4,2,98,36,0,3,1,3,2,3,3,3,4,3,1,4,2,4,3,4,4,4,98,32,0,4,99,99,99
-SIGNIVEL: .byte 44,2,2,3,2,1,2,2,3,2,1,99
+SIGNIVEL: .byte 44,2,2,3,2,1,2,2,3,2,1,99,99,99,99,99,99,99,99,99,99,99,99,99,99,99,99,99,99,99,99,99,99,99,99,99,99,99,99,99,99,99,99,99,99,99,99,99,99,99,99,99,99,99,99,99,99,99,99,99
+BACKGROUND_TUNEL: .byte 0,0,0,1,0,2,0,3,0,4,0,0,1,1,1,2,1,3,1,4,1,0,2,1,2,2,2,3,2,4,2,0,3,1,3,2,3,3,3,4,3,0,4,1,4,2,4,3,4,4,4,99,99,99,99,99,99,99,99,99
+CIELO: .byte 8,0,0,1,0,2,0,3,0,4,0,0,1,1,1,2,1,3,1,4,1,0,2,1,2,2,2,3,2,4,2,0,3,1,3,2,3,3,3,4,3,0,4,1,4,2,4,3,4,4,4,99,99,99,99,99,99,99,99,99
+BLOQUE_NEGRO: .byte 0,0,0,1,0,2,0,3,0,4,0,0,1,1,1,2,1,3,1,4,1,0,2,1,2,2,2,3,2,4,2,0,3,1,3,2,3,3,3,4,3,0,4,1,4,2,4,3,4,4,4,99,99,99,99,99,99,99,99,99
+
 
 JELPI: .byte 28,1,0,3,0,1,3,2,3,3,3,4,3,0,4,2,4,3,4,4,4,0,5,1,5,2,5,3,5,4,5,5,5,0,6,4,6,98,48,1,1,2,1,3,1,98,20,1,2,2,2,3,2,98,24,0,3,5,3,98,8,1,4,5,4,99
 BORRAR_JELPI: .byte 12,1,0,98,12,1,0,3,0,1,3,2,3,3,3,4,3,0,4,2,4,3,4,4,4,0,5,1,5,2,5,3,5,4,5,5,5,0,6,4,6,98,12,1,1,2,1,3,1,98,12,1,2,2,2,3,2,98,12,0,3,5,3,98,12,1,4,5,4,99
@@ -33,32 +38,119 @@ BORRAR_JELPI2: .byte 12,4,6,98,12,4,6,2,6,4,3,3,3,2,3,1,3,5,2,3,2,2,2,1,2,5,1,4,
 
 ;Mapa
 
-MAPA1:	.byte  1,1,1,1,1,1,1,1,1,1
-FILA2:	.byte  1,3,0,1,0,0,0,0,0,1
-FILA3:	.byte  1,1,0,0,0,0,0,0,0,0
-FILA4:	.byte  1,0,0,0,0,0,0,0,0,1
-FILA5:	.byte  1,1,1,1,1,1,0,0,0,1
-FILA6:	.byte  1,0,0,0,0,1,0,0,0,1
-FILA7:	.byte  1,0,0,0,0,0,0,0,0,1
-FILA8:	.byte  0,0,0,0,0,0,0,0,0,1
-FILA9:	.byte  1,0,0,1,0,0,0,0,0,1
-FILA10:	.byte  2,2,2,2,2,2,2,2,2,2
+MAPA1:	.byte  0,0,0,0,0,0,0,0,0,0
+FILA1A:	.byte  1,0,1,0,1,0,1,1,1,0
+FILA1B:	.byte  1,1,1,0,1,0,1,1,1,0
+FILA1C:	.byte  1,0,1,0,1,0,1,0,0,0
+FILA1D:	.byte  1,0,1,0,1,0,1,0,0,0
+FILA1E:	.byte  0,0,0,0,0,0,0,0,0,0
+FILA1F:	.byte  1,1,1,1,1,1,1,1,1,1
+FILA1G:	.byte  1,0,0,0,0,0,0,0,3,1
+FILA1H:	.byte  1,0,0,0,0,0,0,0,3,1
+FILA1I: .byte  1,1,1,1,1,1,1,1,1,1
 
 MAPA2:	.byte  1,1,1,1,1,1,1,1,1,1
-MAPA22:	.byte  1,1,1,1,1,1,1,1,1,1
-FILAB1:	.byte  1,0,1,0,0,0,0,0,0,1
-FILAB3:	.byte  1,0,1,0,0,0,0,0,0,1
-FILAB4:	.byte  1,0,0,0,1,1,1,1,0,1
-FILAB5:	.byte  1,0,0,0,1,3,0,1,0,1
-FILAB6:	.byte  1,0,0,0,1,1,0,1,0,1
-FILAB7:	.byte  1,0,2,0,2,0,0,0,0,1
-FILAB8:	.byte  1,0,2,0,2,0,0,0,0,1
-FILAB9:	.byte  1,0,2,0,2,0,1,0,0,1
-FILAB10: .byte  2,2,2,2,2,2,2,2,2,2
+MAPA2A:	.byte  1,1,1,1,1,1,1,1,1,1
+MAPA2B:	.byte  1,3,0,1,0,0,0,0,0,1
+MAPA2C:	.byte  1,1,0,0,0,0,0,0,0,1
+MAPA2D:	.byte  1,0,0,0,0,0,0,0,0,1
+MAPA2E:	.byte  1,1,1,1,1,1,0,0,0,1
+MAPA2F:	.byte  1,0,0,0,0,1,0,0,0,1
+MAPA2G:	.byte  1,0,0,0,0,0,0,0,0,1
+MAPA2H:	.byte  0,0,0,0,0,0,0,0,0,1
+MAPA2I:	.byte  1,0,0,1,0,0,0,0,0,1
+MAPA2J:	.byte  2,2,2,2,2,2,2,2,2,2
+
+MAPA3:	.byte  1,1,1,1,1,1,1,1,1,1
+MAPA3A:	.byte  1,1,1,1,1,1,1,1,1,1
+FILA3B:	.byte  1,0,1,0,0,0,0,0,0,1
+FILA3C:	.byte  1,0,1,0,0,0,0,0,0,1
+FILA3D:	.byte  1,0,0,0,1,1,1,1,0,1
+FILA3E:	.byte  1,0,0,0,1,3,0,1,0,1
+FILA3F:	.byte  1,0,0,0,1,1,0,1,0,1
+FILA3G:	.byte  1,0,2,0,2,0,0,0,0,1
+FILA3H:	.byte  1,0,2,0,2,0,0,0,0,1
+FILA3I:	.byte  1,0,2,0,2,0,1,0,0,1
+FILA3J: .byte  2,2,2,2,2,2,2,2,2,2
+
+
+MAPA4:	.byte  5,5,5,5,5,5,5,5,5,5
+FILA4A:	.byte  5,5,5,5,5,5,5,5,5,5
+MAPA4B:	.byte  5,5,5,5,5,5,5,5,5,5
+FILA4C:	.byte  5,5,5,5,5,5,5,5,5,5
+FILA4D:	.byte  5,5,5,5,5,5,5,5,5,5
+FILA4E:	.byte  5,5,5,5,5,5,5,5,5,5
+FILA4F:	.byte  1,1,1,1,1,1,1,1,1,1
+FILA4G:	.byte  1,4,4,4,4,4,4,4,4,3
+FILA4H:	.byte  1,4,4,4,4,4,4,4,4,3
+FILA4I:	.byte  1,4,4,4,4,4,4,4,4,3
+FILA4J: .byte  1,1,1,1,1,1,1,1,1,1
+
+MAPA5:	.byte  1,1,1,1,1,1,1,1,1,1
+FILA5A:	.byte  1,1,1,1,1,1,1,1,1,1
+MAPA5B:	.byte  1,1,1,1,1,1,1,1,1,1
+FILA5C:	.byte  1,1,1,1,1,1,1,1,1,1
+FILA5D:	.byte  1,1,1,1,1,1,1,1,1,1
+FILA5E:	.byte  1,1,1,1,1,1,1,1,1,1
+FILA5F:	.byte  1,1,1,1,1,1,1,1,1,1
+FILA5G:	.byte  1,4,4,4,4,4,4,4,4,3
+FILA5H:	.byte  1,4,4,4,4,4,4,4,4,1
+FILA5I:	.byte  1,4,4,4,4,4,4,4,4,1
+FILA5J: .byte  1,1,1,1,1,1,1,1,1,1
+
+MAPA6:	.byte  1,1,1,1,1,1,1,1,1,1
+FILA6A:	.byte  1,1,1,1,1,1,1,1,1,1
+MAPA6B:	.byte  1,4,4,6,6,6,4,4,4,1
+FILA6C:	.byte  1,4,4,4,3,4,4,4,4,1
+FILA6D:	.byte  1,4,6,6,6,6,6,6,4,1
+FILA6E:	.byte  1,4,4,4,4,4,4,4,4,1
+FILA6F:	.byte  1,4,4,4,4,4,4,4,4,1
+FILA6G:	.byte  1,6,6,4,4,4,4,4,4,1
+FILA6H:	.byte  1,4,4,4,4,4,4,4,4,1
+FILA6I:	.byte  1,4,4,4,4,4,4,4,4,1
+FILA6J: .byte  1,1,1,1,1,1,1,1,1,1
+
+MAPA7:	.byte  1,1,1,1,1,1,1,1,1,1
+FILA7A:	.byte  1,1,1,1,1,1,1,1,1,1
+MAPA7B:	.byte  1,3,4,6,4,4,4,4,4,1
+FILA7C:	.byte  1,6,4,4,4,4,4,4,4,1
+FILA7D:	.byte  1,4,4,4,6,4,4,4,4,1
+FILA7E:	.byte  1,4,4,4,6,4,4,4,4,1
+FILA7F:	.byte  1,4,4,4,6,4,4,4,4,1
+FILA7G:	.byte  1,6,6,6,6,6,4,4,6,1
+FILA7H:	.byte  1,4,4,4,4,6,4,4,4,1
+FILA7I:	.byte  1,4,4,6,4,4,4,4,4,1
+FILA7J: .byte  1,1,1,1,1,1,1,1,1,1
+
+MAPA7:	.byte  1,1,1,1,1,1,1,1,1,1
+FILA8A:	.byte  1,1,1,1,1,1,1,1,1,1
+MAPA8B:	.byte  1,4,4,6,6,4,4,4,3,1
+FILA8C:	.byte  1,4,4,4,4,4,4,4,6,1
+FILA8D:	.byte  1,4,6,6,6,4,6,6,6,1
+FILA8E:	.byte  1,4,6,6,6,4,6,4,4,1
+FILA8F:	.byte  1,4,6,6,6,4,6,4,4,1
+FILA8G:	.byte  1,4,4,4,4,4,6,4,4,1
+FILA8H:	.byte  1,4,6,6,6,6,6,4,4,1
+FILA8I:	.byte  1,4,4,4,4,4,4,4,4,1
+FILA8J: .byte  1,1,1,1,1,1,1,1,1,1
+
+MAPA9:	.byte  0,0,0,0,0,0,0,0,0,0
+MAPA9A:	.byte  0,0,0,0,0,0,0,0,0,0
+MAPA9B:	.byte  1,1,1,0,1,0,1,0,0,1
+MAPA9C:	.byte  1,0,0,0,1,0,1,1,0,1
+MAPA9D:	.byte  1,1,0,0,1,0,1,0,1,1
+MAPA9E:	.byte  1,0,0,0,1,0,1,0,1,1
+MAPA9F:	.byte  1,0,0,0,1,0,1,0,0,1
+MAPA9G:	.byte  0,0,0,0,0,0,0,0,0,0
+MAPA9H:	.byte  0,0,0,0,0,0,0,0,0,0
+MAPA9I:	.byte  0,0,0,0,0,0,0,0,0,0
+MAPA9J:	.byte  2,2,2,2,2,2,2,2,2,2
 
 
 CAER: .word 0										; 0 = caer hacia abajo / 1 = caer hacia arriba
 NIVEL_ACTUAL: .word 0								; numero de mapa en el que se esta jugando
+
+
 
 
 .text
@@ -187,6 +279,8 @@ colisionIzq:	daddi $a0, $a0, -2					; simula movimiento a la izquierda
 				lbu $t4, MAPA1($t4)					; carga que hay en el mapa
 				daddi $t5, $zero, 0					; 0 = bloque libre 
 				beq $t4, $t5, moverIzquierda	 	; 
+				daddi $t5, $zero, 4					; 4 = bloque libre 
+				beq $t4, $t5, moverIzquierda	 	; 
 				daddi $t5, $zero, 3					; 3 = bloque siguiente nivel 
 				beq $t4, $t5, siguienteNivel	 	; avanzar al siguiente nivel
 				j finMoverPersonaje					;
@@ -209,7 +303,11 @@ colisionDer:	daddi $a0, $a0, 7					; simula movimiento a la derecha 3+5(del offs
 
 				lbu $t4, MAPA1($t4)					; carga que hay en el mapa
 				daddi $t5, $zero, 0					; 0 = bloque libre 
-				beq $t4, $t5, moverDerecha 		 	; 
+				beq $t4, $t5, moverDerecha 		 	;
+				daddi $t5, $zero, 4					; 4 = bloque libre 
+				beq $t4, $t5, moverDerecha		 	; 
+				daddi $t5, $zero, 3					; 3 = bloque siguiente nivel 
+				beq $t4, $t5, siguienteNivel	 	; avanzar al siguiente nivel
 				j finMoverPersonaje					;
 
 siguienteNivel: ld $t9, NIVEL_ACTUAL($zero)			; carga nivel actual
@@ -259,6 +357,8 @@ colisionAbajo:	daddi $a1, $a1, -2					; simula movimiento para abajo
 				lbu $t4, MAPA1($t4)					; carga que hay en el mapa
 				daddi $t5, $zero, 0					; 0 = bloque libre 
 				beq $t4, $t5, moverAbajo		 	;
+				daddi $t5, $zero, 4					; 4 = bloque libre 
+				beq $t4, $t5, moverAbajo		 	;
 				j finCaerAbajo	
 
 colisionArriba:	daddi $a1, $a1, 7					; simula movimiento para arriba
@@ -279,6 +379,8 @@ colisionArriba:	daddi $a1, $a1, 7					; simula movimiento para arriba
 
 				lbu $t4, MAPA1($t4)					; carga que hay en el mapa
 				daddi $t5, $zero, 0					; 0 = bloque libre 
+				beq $t4, $t5, moverArriba		 	;
+				daddi $t5, $zero, 4					; 4 = bloque libre 
 				beq $t4, $t5, moverArriba		 	;
 				j finCaerAbajo	
 
@@ -331,6 +433,18 @@ dibujar:		beq $t0, $t1, finDibujar 			; si se dibujo toda la matriz, finalizar s
 				daddi $t7, $zero, 193				; offset al siguiente sprite en la lista
 				daddi $t8, $zero, 192  				; offset al nuevo color a usar
 				beq $t5, $t6, dibujarBackgr			; $t5 == 3 => dibujar SIGNIVEL
+				daddi $t6, $zero, 4					; condicion de sprite a dibujar 4 == SIGNIVEL
+				daddi $t7, $zero, 257				; offset al siguiente sprite en la lista
+				daddi $t8, $zero, 256  				; offset al nuevo color a usar
+				beq $t5, $t6, dibujarBackgr			; $t5 == 4 => dibujar SIGNIVEL
+				daddi $t6, $zero, 5					; condicion de sprite a dibujar 5 == SIGNIVEL
+				daddi $t7, $zero, 321				; offset al siguiente sprite en la lista
+				daddi $t8, $zero, 320  				; offset al nuevo color a usar
+				beq $t5, $t6, dibujarBackgr			; $t5 == 5 => dibujar SIGNIVEL
+				daddi $t6, $zero, 6					; condicion de sprite a dibujar 6 == SIGNIVEL
+				daddi $t7, $zero, 385				; offset al siguiente sprite en la lista
+				daddi $t8, $zero, 384  				; offset al nuevo color a usar
+				beq $t5, $t6, dibujarBackgr			; $t5 == 6 => dibujar SIGNIVEL
 				j finElemento
 
 cambiarColor:	daddi $t7, $t7, 1
